@@ -9,7 +9,8 @@
 //
 //
 //
-//
+// IMPORTANT
+// CAN ALSO JUST DO PRINTLNS, and SET ARRAY VAL OF FULLGRID to @ Char!!!!!!!! YOu NOOB:::!
 //
 //
 //
