@@ -10,6 +10,7 @@ public class Test extends Frame
     {
         super("TEST");
         this.setSize(400,400);
+        this.setBackground(Color.GREEN);
         addWindowListener(new WindowAdapter() 
         {
          public void windowClosing(WindowEvent windowEvent){
