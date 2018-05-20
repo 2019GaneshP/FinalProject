@@ -37,7 +37,7 @@ public class Test extends Frame
             for(String ch : row)
             {
                 g.drawString(ch,rowPos,colPos); // Variable names are backwards. JFrame
-                rowPos += 7;                    // handles it oddly. 
+                rowPos += 70;                    // handles it oddly. 
             }
             colPos += 10;
         }

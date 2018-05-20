@@ -102,22 +102,22 @@ public class TileGeneration
                 fullGrid[i][2] = topRight[i];
         }
         
-        for(int i = topLeft.length + 1; i < botLeft.length; i++)
+        for(int i = botLeft.length; i < fullGrid.length; i++)
         {
             
-                fullGrid[i][0] = botLeft[i];
+                fullGrid[i][0] = botLeft[i - botLeft.length];
         }
         
-        for(int i = topCenter.length + 1; i < botCenter.length; i++)
+        for(int i = botCenter.length; i < fullGrid.length; i++)
         {
             
-                fullGrid[i][1] = botCenter[i];
+                fullGrid[i][1] = botCenter[i - botCenter.length];
         }
         
-        for(int i = topRight.length + 1; i < botRight.length; i++)
+        for(int i = botRight.length; i < fullGrid.length; i++)
         {
             
-                fullGrid[i][2] = botRight[i];
+                fullGrid[i][2] = botRight[i - botRight.length];
         }
         
         
@@ -125,8 +125,9 @@ public class TileGeneration
         {
             for(String c : row)
             {
-                System.out.println(c);
+                System.out.print(c);
             }
+            System.out.println();
         }
         
         return fullGrid; 
