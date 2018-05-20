@@ -3,4 +3,5 @@ comment0.target=TileGeneration
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ TileGeneration\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=java.lang.String[][]\ getFullGrid()
+comment1.text=\r\n\ ADJUST\ BELOW\ ALGORITHM\ AND\ ABOVE\ DECLARATIONS\ TO\ DEAL\ WITH\ SINGLE\ ARRAY\ TILES,\ CONVERT\ TO\ \r\n\ 2D\ ARRAY\ FOR\ PURPOSES\ OF\ RENDERING\!\!\!\r\n
 numComments=2
