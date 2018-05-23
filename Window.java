@@ -8,6 +8,7 @@ public class Window extends Frame
     public Window()
     {
         super("TEST");
+        Grid gr = new Grid();
         this.setSize(400,400);
         this.setBackground(Color.BLACK);
         addWindowListener(new WindowAdapter() 
@@ -28,7 +29,8 @@ public class Window extends Frame
             public void keyPressed(KeyEvent e) 
             {
                 System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
-                Grid.processKeyPress(e.getKeyCode());
+                gr.processKeyPress(e.getKeyCode());
+                repaint();
             }
 
             @Override
@@ -37,6 +39,7 @@ public class Window extends Frame
             }
         });
     }
+    
     public static void main(String[] args)
     {
         Window w = new Window();
@@ -46,7 +49,7 @@ public class Window extends Frame
     {
         g.setColor(Color.WHITE);
         g.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
-        char[][] grid = GridGeneration.getFullGrid();
+        char[][] grid = Grid.getGrid();
         int colPos = 100;
         
         for(char[] row : grid)

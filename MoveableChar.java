@@ -7,7 +7,7 @@
  */
 public abstract class MoveableChar
 {
-    int[] pos = new int[2];
+    int[] pos = new int[2]; // 0 is y-coord, 1 is x-coord
     private static int health;
     private static int attackDamage;
     
@@ -23,6 +23,6 @@ public abstract class MoveableChar
         return pos;
     }
     
-    public abstract void move();
+    public abstract void move(String dir);
     public abstract void attack();
 }
