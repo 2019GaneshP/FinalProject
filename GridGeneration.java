@@ -78,7 +78,7 @@ public class GridGeneration
     
     
     /**
-     * Returns the full grid that will be painted. This is the bulk of the work. 
+     * Returns the full grid that will be painted.  
      */
     public static char[][] getFullGrid() // For testing. Rename method to combineSegments or something 
     {                                    // once implement random generation of segments.

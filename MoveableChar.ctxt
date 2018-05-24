@@ -1,12 +1,15 @@
 #BlueJ class context
 comment0.target=MoveableChar
 comment0.text=\r\n\ Write\ a\ description\ of\ interface\ MoveableChar\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=posIn\ healthIn\ dmgIn
-comment1.target=MoveableChar(int[],\ int,\ int)
+comment1.params=posIn\ healthIn\ dmgIn\ iconIn
+comment1.target=MoveableChar(int[],\ int,\ int,\ char)
+comment1.text=\r\n\ Creates\ a\ new\ MoveableChar\r\n\ \r\n
 comment2.params=
 comment2.target=int[]\ getPos()
+comment2.text=\r\n\ returns\ the\ position,\ where\ index\ 0\ is\ the\ x\ value\ and\ index\ 1\ is\ y\ value\r\n
 comment3.params=dir
 comment3.target=void\ move(java.lang.String)
+comment3.text=\r\n\ Moves\ the\ MoveableChar\ based\ on\ the\ direction\ passed\ in.\ Will\ not\ move\ that\ direction\ if\ there\ is\ a\ wall\r\n\ (denoted\ by\ 'X')\ in\ the\ way.\ \r\n
 comment4.params=
 comment4.target=void\ attack()
 numComments=5

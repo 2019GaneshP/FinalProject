@@ -7,8 +7,8 @@
  */
 public class Grid
 {
-    static char[][] grid;
-    Player player;
+    private static char[][] grid;
+    private MoveableChar player;
     
     
     public Grid()
@@ -18,18 +18,40 @@ public class Grid
     }
     
     
+    /**
+     * returns the whole grid. 
+     */
     public static char[][] getGrid()
     {
         return grid;
     }
     
-    public char setGridChar(int rowVal, int colVal) // Returns char that was there before.
+    
+    
+    /**
+     * Sets a certain position in the grid to a character. 
+     * return: char that was there previously. 
+     */
+    public static char setGridChar(int rowVal, int colVal, char charIn) 
     {
-        
+        char tempChar = grid[rowVal][colVal];
+        grid[rowVal][colVal] = charIn;
+        return tempChar;
     }
     
     
+    /**
+     * returns the char at a certain position in the grid.
+     */
+    public static char getGridChar(int rowVal, int colVal)
+    {
+        return grid[rowVal][colVal];
+    }
     
+    /**
+     * processes inputs by user to move player char. 
+     * will add to this later.
+     */
     public void processKeyPress(int keyCode)
     {
         if(keyCode == 37)
@@ -39,9 +61,6 @@ public class Grid
         else if(keyCode == 39)
             player.move("right");
         else if(keyCode == 40)
-            player.move("down");    
-            
-        grid[player.getPos()[0]][player.getPos()[1]] = '@';    
-            
+            player.move("down");           
     }
 }
