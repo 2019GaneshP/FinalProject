@@ -7,8 +7,6 @@
  */
 public class Monster extends MoveableChar
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class Monster
@@ -16,20 +14,31 @@ public class Monster extends MoveableChar
     public Monster()
     {
         super(new int[] {3,3},10,10,'M');
-        x = 0;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    
+    public void moveMonster()
     {
-        // put your code here
-        return x + y;
+        int r = (int) (Math.random() * 4);
+        
+        if(r == 0)
+        {
+            this.move("up");
+        }
+        if(r == 1)
+        {
+            this.move("down");
+        }
+        if(r == 2)
+        {
+            this.move("left");
+        }
+        if(r == 3)
+        {
+            this.move("right");
+        }
     }
+    
+    
     public void attack()
     {
         //Todo

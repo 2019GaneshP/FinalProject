@@ -8,8 +8,6 @@
 public class Player extends MoveableChar
 {
     
-    
-    char prevChar;
     public Player()
     {
         super(new int[] {1,1},10,10,'@');   

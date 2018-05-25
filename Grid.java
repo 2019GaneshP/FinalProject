@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Write a description of class Grid here.
  *
@@ -8,12 +8,13 @@
 public class Grid
 {
     private static char[][] grid;
-    private MoveableChar player;
-    
-    
+    private Player player;
+    private ArrayList<Monster> monsters;
     public Grid()
     {
         grid = GridGeneration.getFullGrid();
+        monsters = new ArrayList<Monster>();
+        monsters.add(new Monster());
         player = new Player();
     }
     
@@ -61,6 +62,11 @@ public class Grid
         else if(keyCode == 39)
             player.move("right");
         else if(keyCode == 40)
-            player.move("down");           
+            player.move("down");
+            
+        for(Monster m : monsters)
+        {
+            m.moveMonster();
+        }
     }
 }

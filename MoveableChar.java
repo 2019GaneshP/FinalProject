@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Write a description of interface MoveableChar here.
  *
@@ -8,11 +8,11 @@
 public abstract class MoveableChar
 {
     int[] pos = new int[2]; // 0 is y-coord, 1 is x-coord
-    private static int health;
-    private static int attackDamage;
-    private static char icon;
+    private int health;
+    private int attackDamage;
+    private char icon;
     private char prevChar;
-    
+    private ArrayList<Character> forbiddenChars; //Chars that the player can't move in to. 
     
     /**
      * Creates a new MoveableChar
@@ -24,6 +24,11 @@ public abstract class MoveableChar
         health = healthIn;
         attackDamage = dmgIn;
         icon = iconIn;
+        
+        forbiddenChars = new ArrayList<Character>();
+        forbiddenChars.add('X');
+        forbiddenChars.add('M');
+        forbiddenChars.add('@');
         prevChar = Grid.getGridChar(pos[0],pos[1]);
     }
     /**
@@ -42,7 +47,7 @@ public abstract class MoveableChar
        
             if(dir.equals("left"))
             {
-                if(Grid.getGridChar(pos[0],pos[1] - 1) != 'X')
+                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0],pos[1] - 1))))
                 {
                     pos[1]--;
                     Grid.setGridChar(pos[0],pos[1] + 1, prevChar);
@@ -51,7 +56,7 @@ public abstract class MoveableChar
             }
             if(dir.equals("right"))
             {
-                if(Grid.getGridChar(pos[0],pos[1] + 1) != 'X')
+                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0],pos[1] + 1))))
                 {
                     pos[1]++;
                     Grid.setGridChar(pos[0],pos[1] - 1, prevChar);
@@ -60,7 +65,7 @@ public abstract class MoveableChar
             }
             if(dir.equals("up"))
             {
-                if(Grid.getGridChar(pos[0] - 1,pos[1]) != 'X')
+                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0] - 1,pos[1]))))
                 {
                     pos[0]--;
                     Grid.setGridChar(pos[0] + 1,pos[1], prevChar);
@@ -69,16 +74,13 @@ public abstract class MoveableChar
             }   
             if(dir.equals("down"))
             {
-                if(Grid.getGridChar(pos[0] + 1,pos[1]) != 'X')
+                if(!forbiddenChars.contains(Grid.getGridChar(pos[0] + 1,pos[1])))
                 {
                     pos[0]++;
                     Grid.setGridChar(pos[0] - 1,pos[1], prevChar);
                     prevChar = Grid.setGridChar(pos[0],pos[1],icon);
                 }
             }    
-            
-            
-                
     }
     public abstract void attack();
 }

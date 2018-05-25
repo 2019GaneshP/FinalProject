@@ -1,16 +1,22 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+
 
 public class Window extends Frame
 {
+    private Grid gr;
+    private BufferedImage bufferImage;
     
     public Window()
     {
         super("TEST");
-        Grid gr = new Grid();
+        gr = new Grid();
         this.setSize(400,400);
         this.setBackground(Color.BLACK);
+        
+        
         addWindowListener(new WindowAdapter() 
         {
          public void windowClosing(WindowEvent windowEvent){
@@ -47,8 +53,11 @@ public class Window extends Frame
     
     public void paint(Graphics g)
     {
-        g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
+        bufferImage = new BufferedImage(this.getWidth(),this.getHeight(),4);
+        Graphics2D gr = bufferImage.createGraphics();
+        
+        gr.setColor(Color.WHITE);
+        gr.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
         char[][] grid = Grid.getGrid();
         int colPos = 100;
         
@@ -57,11 +66,13 @@ public class Window extends Frame
             int rowPos = 100;
             for(char ch : row)
             {
-                g.drawString(Character.toString(ch),rowPos,colPos); // Variable names are backwards. JFrame
+                gr.drawString(Character.toString(ch),rowPos,colPos); // Variable names are backwards. Frame
                 rowPos += 7;                    // handles it oddly. 
             }
             colPos += 10;
         }
+        //super(g);
+        g.drawImage(bufferImage, 0, 0, null);
     }
     
     
