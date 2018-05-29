@@ -5,15 +5,17 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Monster extends MoveableChar
+public abstract class Monster extends MoveableChar
 {
-
+    private static final int NUM_MONSTER_TYPES = 2;
+    
+    
     /**
      * Constructor for objects of class Monster
      */
-    public Monster()
+    public Monster(char icon)
     {
-        super(new int[] {3,3},10,10,'M');
+        super(new int[] {3,3},10,10,icon); //location is placeholder
     }
     
     public void moveMonster()
@@ -38,6 +40,20 @@ public class Monster extends MoveableChar
         }
     }
     
+    public static Monster createMonster()
+    {
+        int r = (int) ( Math.random() * NUM_MONSTER_TYPES);
+        
+        if(r == 0)
+            {
+                return new Zombie();
+            }
+        else if(r == 1)
+        {
+            return new Mummy();
+        }
+        return null;
+    }
     
     public void attack()
     {

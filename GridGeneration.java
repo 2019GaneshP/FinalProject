@@ -6,7 +6,7 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class GridGeneration
+public abstract class GridGeneration
 {
     private static final int SIDE_LENGTH = 10;
     private char[][] totalGrid = this.getFullGrid();

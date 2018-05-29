@@ -28,6 +28,7 @@ public abstract class MoveableChar
         forbiddenChars = new ArrayList<Character>();
         forbiddenChars.add('X');
         forbiddenChars.add('M');
+        forbiddenChars.add('Z');
         forbiddenChars.add('@');
         prevChar = Grid.getGridChar(pos[0],pos[1]);
     }

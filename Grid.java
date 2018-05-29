@@ -10,11 +10,15 @@ public class Grid
     private static char[][] grid;
     private Player player;
     private ArrayList<Monster> monsters;
-    public Grid()
+    private final int NUM_MONSTERS;
+    
+    public Grid(int numMonstersIn)
     {
+        NUM_MONSTERS = numMonstersIn;
         grid = GridGeneration.getFullGrid();
         monsters = new ArrayList<Monster>();
-        monsters.add(new Monster());
+        for(int i = 0; i < NUM_MONSTERS; i++)
+            this.addMonster(Monster.createMonster());
         player = new Player();
     }
     
@@ -27,7 +31,10 @@ public class Grid
         return grid;
     }
     
-    
+    public void addMonster(Monster m)
+    {
+        monsters.add(m);
+    }
     
     /**
      * Sets a certain position in the grid to a character. 
