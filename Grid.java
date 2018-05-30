@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Grid
 {
-    private static char[][] grid;
+    private char[][] grid;
     private Player player;
     private ArrayList<Monster> monsters;
     private final int NUM_MONSTERS;
@@ -26,7 +26,7 @@ public class Grid
     /**
      * returns the whole grid. 
      */
-    public static char[][] getGrid()
+    public char[][] getGrid()
     {
         return grid;
     }
@@ -40,20 +40,34 @@ public class Grid
      * Sets a certain position in the grid to a character. 
      * return: char that was there previously. 
      */
-    public static char setGridChar(int rowVal, int colVal, char charIn) 
+    public char setGridChar(int rowVal, int colVal, char charIn) 
     {
         char tempChar = grid[rowVal][colVal];
         grid[rowVal][colVal] = charIn;
         return tempChar;
     }
     
+    public MoveableChar characterAt(int x, int y)
+    {
+        for(Monster m : monsters)
+            if(m.getPos()[0] == x && m.getPos()[1] == y)
+                return m;
+        if(player.getPos()[0] == x && player.getPos()[1] == y)
+            return player;
+        return null;        
+    }
     
     /**
      * returns the char at a certain position in the grid.
      */
-    public static char getGridChar(int rowVal, int colVal)
+    public char getGridChar(int rowVal, int colVal)
     {
         return grid[rowVal][colVal];
+    }
+    
+    public void removeMonster(Monster m)
+    {
+        monsters.remove(m);
     }
     
     /**

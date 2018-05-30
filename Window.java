@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class Window extends Frame
 {
-    private Grid gr;
+    private static Grid gr;
     private BufferedImage bufferImage;
     
     public Window()
@@ -51,6 +51,16 @@ public class Window extends Frame
         Window w = new Window();
     }
     
+    public static Grid getGrid()
+    {
+        return gr;
+    }
+    
+    public static char[][] getCharGrid()
+    {
+        return gr.getGrid();
+    }
+    
     public void paint(Graphics g)
     {
         bufferImage = new BufferedImage(this.getWidth(),this.getHeight(),4);
@@ -58,7 +68,7 @@ public class Window extends Frame
         
         graph.setColor(Color.WHITE);
         graph.setFont(new Font(Font.MONOSPACED,Font.PLAIN,12));
-        char[][] grid = Grid.getGrid();
+        char[][] grid = Window.getCharGrid();
         int colPos = 100;
         
         for(char[] row : grid)

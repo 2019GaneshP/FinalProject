@@ -30,7 +30,7 @@ public abstract class MoveableChar
         forbiddenChars.add('M');
         forbiddenChars.add('Z');
         forbiddenChars.add('@');
-        prevChar = Grid.getGridChar(pos[0],pos[1]);
+        prevChar = '-'; //All moveablechars will start on floor
     }
     /**
      * returns the position, where index 0 is the x value and index 1 is y value
@@ -39,6 +39,14 @@ public abstract class MoveableChar
     {
         return pos;
     }
+    
+    public boolean isMonster(MoveableChar m)
+    {
+        if(m.icon != '@')
+            return true;
+        return false;
+    }
+    
     /**
      * Moves the MoveableChar based on the direction passed in. Will not move that direction if there is a wall
      * (denoted by 'X') in the way. 
@@ -48,40 +56,82 @@ public abstract class MoveableChar
        
             if(dir.equals("left"))
             {
-                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0],pos[1] - 1))))
+                if(!(forbiddenChars.contains(Window.getGrid().getGridChar(pos[0],pos[1] - 1))))
                 {
                     pos[1]--;
-                    Grid.setGridChar(pos[0],pos[1] + 1, prevChar);
-                    prevChar = Grid.setGridChar(pos[0],pos[1],icon);
+                    Window.getGrid().setGridChar(pos[0],pos[1] + 1, prevChar);
+                    prevChar = Window.getGrid().setGridChar(pos[0],pos[1],icon);
+                }
+                else this.attack("left");
+            }
+            if(dir.equals("right"))
+            {
+                if(!(forbiddenChars.contains(Window.getGrid().getGridChar(pos[0],pos[1] + 1))))
+                {
+                    pos[1]++;
+                    Window.getGrid().setGridChar(pos[0],pos[1] - 1, prevChar);
+                    prevChar = Window.getGrid().setGridChar(pos[0],pos[1],icon);
+                }
+                else this.attack("right");
+            }
+            if(dir.equals("up"))
+            {
+                if(!(forbiddenChars.contains(Window.getGrid().getGridChar(pos[0] - 1,pos[1]))))
+                {
+                    pos[0]--;
+                    Window.getGrid().setGridChar(pos[0] + 1,pos[1], prevChar);
+                    prevChar = Window.getGrid().setGridChar(pos[0],pos[1],icon);
+                }
+                else this.attack("up");
+            }   
+            if(dir.equals("down"))
+            {
+                if(!forbiddenChars.contains(Window.getGrid().getGridChar(pos[0] + 1,pos[1])))
+                {
+                    pos[0]++;
+                    Window.getGrid().setGridChar(pos[0] - 1,pos[1], prevChar);
+                    prevChar = Window.getGrid().setGridChar(pos[0],pos[1],icon);
+                }
+                else this.attack("down");
+            }    
+    }
+    
+    public void changeHealth(int change)
+    {
+        health -= change;
+        if(health <= 0 && isMonster(this))
+            Window.getGrid().removeMonster((Monster) this);
+    }
+    
+    public void attack(String dir) //Figure out why monsters don't disappear after killed. 
+    { 
+            if(dir.equals("left"))
+            {
+                if(!(Window.getGrid().getGridChar(pos[0],pos[1] - 1) == 'X'))
+                {
+                    Window.getGrid().characterAt(pos[0],pos[1] - 1).changeHealth(5); // TODO: REMOVE PLACEHOLDER
                 }
             }
             if(dir.equals("right"))
             {
-                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0],pos[1] + 1))))
+                if(!(Window.getGrid().getGridChar(pos[0],pos[1] + 1) == 'X'))
                 {
-                    pos[1]++;
-                    Grid.setGridChar(pos[0],pos[1] - 1, prevChar);
-                    prevChar = Grid.setGridChar(pos[0],pos[1],icon);
+                    Window.getGrid().characterAt(pos[0],pos[1] + 1).changeHealth(5);
                 }
             }
             if(dir.equals("up"))
             {
-                if(!(forbiddenChars.contains(Grid.getGridChar(pos[0] - 1,pos[1]))))
+                if(!(Window.getGrid().getGridChar(pos[0] - 1,pos[1]) == 'X'))
                 {
-                    pos[0]--;
-                    Grid.setGridChar(pos[0] + 1,pos[1], prevChar);
-                    prevChar = Grid.setGridChar(pos[0],pos[1],icon);
+                    Window.getGrid().characterAt(pos[0] - 1,pos[1]).changeHealth(5);
                 }
             }   
             if(dir.equals("down"))
             {
-                if(!forbiddenChars.contains(Grid.getGridChar(pos[0] + 1,pos[1])))
+                if(!(Window.getGrid().getGridChar(pos[0] + 1,pos[1]) == 'X'))
                 {
-                    pos[0]++;
-                    Grid.setGridChar(pos[0] - 1,pos[1], prevChar);
-                    prevChar = Grid.setGridChar(pos[0],pos[1],icon);
+                    Window.getGrid().characterAt(pos[0] + 1,pos[1]).changeHealth(5);
                 }
             }    
     }
-    public abstract void attack();
 }

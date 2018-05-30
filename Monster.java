@@ -55,8 +55,4 @@ public abstract class Monster extends MoveableChar
         return null;
     }
     
-    public void attack()
-    {
-        //Todo
-    }
 }
