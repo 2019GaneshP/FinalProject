@@ -11,4 +11,9 @@ public class Mummy extends Monster
     {
         super('M');
     }
+    
+    public String getName()
+    {
+        return "Mummy";
+    }
 }

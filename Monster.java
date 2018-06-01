@@ -15,7 +15,7 @@ public abstract class Monster extends MoveableChar
      */
     public Monster(char icon)
     {
-        super(new int[] {3,3},10,10,icon); //location is placeholder
+        super(10,10,icon); //location is placeholder
     }
     
     public void moveMonster()
@@ -54,5 +54,7 @@ public abstract class Monster extends MoveableChar
         }
         return null;
     }
+    
+
     
 }

@@ -12,7 +12,8 @@ public class Window extends Frame
     public Window()
     {
         super("TEST");
-        gr = new Grid(5);
+        gr = new Grid(5,5);
+        gr.populate();
         this.setSize(400,400);
         this.setBackground(Color.BLACK);
         

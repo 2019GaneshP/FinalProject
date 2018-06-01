@@ -11,4 +11,9 @@ public class Zombie extends Monster
     {
         super('Z');
     }
+    
+    public String getName()
+    {
+        return "Zombie";
+    }
 }

@@ -10,11 +10,16 @@ public class Player extends MoveableChar
     
     public Player()
     {
-        super(new int[] {1,1},10,10,'@');   
+        super(10,1,'@');   
     }
-        
-    public void attack()
+    
+    public void pickUp()
     {
-        //TODO
+        Window.getGrid().itemAt(this.getPos()[0],this.getPos()[1]).pickUp();
+    }
+    
+    public String getName()
+    {
+        return "Player";
     }
 }

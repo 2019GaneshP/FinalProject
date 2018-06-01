@@ -10,18 +10,37 @@ public class Grid
     private char[][] grid;
     private Player player;
     private ArrayList<Monster> monsters;
+    private ArrayList<Item> items;
     private final int NUM_MONSTERS;
+    private final int NUM_ITEMS;
     
-    public Grid(int numMonstersIn)
+    public Grid(int numMonstersIn, int numItemsIn)
     {
         NUM_MONSTERS = numMonstersIn;
+        NUM_ITEMS = numItemsIn;
         grid = GridGeneration.getFullGrid();
         monsters = new ArrayList<Monster>();
-        for(int i = 0; i < NUM_MONSTERS; i++)
-            this.addMonster(Monster.createMonster());
-        player = new Player();
+        items = new ArrayList<Item>();
     }
     
+    public void populate() //If in constructor, causes null pointer. Gets called by Window.
+    {
+        player = new Player();
+        populateMonsters();
+        populateItems();
+    }
+    
+    private void populateMonsters()
+    {
+        for(int i = 0; i < NUM_MONSTERS; i++)
+            this.addMonster(Monster.createMonster());
+    }
+    
+    private void populateItems()
+    {
+         for(int i = 0; i < NUM_MONSTERS; i++)
+            this.addItem(Item.createItem());
+    }
     
     /**
      * returns the whole grid. 
@@ -31,9 +50,24 @@ public class Grid
         return grid;
     }
     
-    public void addMonster(Monster m)
+    public int getGridLength()
+    {
+        return grid.length; //20 is placeholder 
+    }
+    
+    public int getGridWidth()
+    {
+        return grid[0].length; //30 is placeholder
+    }
+    
+    private void addMonster(Monster m)
     {
         monsters.add(m);
+    }
+    
+    private void addItem(Item i)
+    {
+        items.add(i);
     }
     
     /**
@@ -55,6 +89,14 @@ public class Grid
         if(player.getPos()[0] == x && player.getPos()[1] == y)
             return player;
         return null;        
+    }
+    
+    public Item itemAt(int x, int y)
+    {
+        for(Item i : items)
+            if(i.getPos()[0] == x && i.getPos()[1] == y)
+                return i;
+        return null;
     }
     
     /**
@@ -84,10 +126,18 @@ public class Grid
             player.move("right");
         else if(keyCode == 40)
             player.move("down");
-            
-        for(Monster m : monsters)
+        else if(keyCode == 44)
+            player.pickUp();
+        try
+        {    
+            for(Monster m : monsters)
+            {
+                m.moveMonster();
+            }
+        }
+        catch(ConcurrentModificationException e)
         {
-            m.moveMonster();
+            //Do nothing
         }
     }
 }
