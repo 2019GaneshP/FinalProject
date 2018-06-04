@@ -14,7 +14,7 @@ public class Sword extends Item
     
     public void effect()
     {
-        
+        Window.getGrid().characterAt(this.getPos()[0], this.getPos()[1]).changeDamage(2);
     }
     
 }

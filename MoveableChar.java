@@ -118,9 +118,16 @@ public abstract class MoveableChar
         }
         else if(health <= 0) //Player char
         {
-            
+            System.out.println("You Die!");
+            Window.getGrid().kill();
         }
     }
+    
+    public void changeDamage(int change)
+    {
+        attackDamage += change;
+    }
+    
     
     private int getDamage()
     {

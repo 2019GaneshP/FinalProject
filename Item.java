@@ -10,7 +10,7 @@ public abstract class Item
     int[] pos = new int[2];
     private char icon;
     
-    private static final int NUM_ITEM_TYPES = 2; // Change when adding items.
+    private static final int NUM_ITEM_TYPES = 1; // Change when adding items.
     
     public Item(char iconIn)
     {
@@ -37,10 +37,7 @@ public abstract class Item
     public void pickUp()
     {
         this.effect();
-        if(Window.getGrid().characterAt(pos[0],pos[1]) == null)
-            Window.getGrid().setGridChar(pos[0],pos[1],'-');
-        else
-            Window.getGrid().characterAt(pos[0],pos[1]).setPrevChar('-');
+        Window.getGrid().characterAt(pos[0],pos[1]).setPrevChar('-');
         
     }
     

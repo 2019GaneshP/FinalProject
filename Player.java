@@ -13,9 +13,12 @@ public class Player extends MoveableChar
         super(10,1,'@');   
     }
     
-    public void pickUp()
+    public Item pickUp()
     {
-        Window.getGrid().itemAt(this.getPos()[0],this.getPos()[1]).pickUp();
+        Item i = Window.getGrid().itemAt(this.getPos()[0],this.getPos()[1]);
+        if(i != null)
+            i.pickUp();
+        return i;
     }
     
     public String getName()

@@ -15,7 +15,7 @@ public abstract class Monster extends MoveableChar
      */
     public Monster(char icon)
     {
-        super(10,10,icon); //location is placeholder
+        super(10,1,icon);
     }
     
     public void moveMonster()
@@ -42,8 +42,7 @@ public abstract class Monster extends MoveableChar
     
     public static Monster createMonster()
     {
-        int r = (int) ( Math.random() * NUM_MONSTER_TYPES);
-        
+        int r = (int) (Math.random() * NUM_MONSTER_TYPES);
         if(r == 0)
             {
                 return new Zombie();

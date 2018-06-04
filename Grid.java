@@ -112,6 +112,11 @@ public class Grid
         monsters.remove(m);
     }
     
+    public void kill()
+    {
+        grid = null;
+    }
+    
     /**
      * processes inputs by user to move player char. 
      * will add to this later.
@@ -127,7 +132,11 @@ public class Grid
         else if(keyCode == 40)
             player.move("down");
         else if(keyCode == 44)
-            player.pickUp();
+        {
+            Item it = player.pickUp();
+            if(it != null)
+                items.remove(it);
+        }
         try
         {    
             for(Monster m : monsters)
