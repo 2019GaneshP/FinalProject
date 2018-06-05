@@ -8,7 +8,7 @@ import java.util.*;
 public class Grid
 {
     private char[][] grid;
-    private Player player;
+    private static Player player;
     private ArrayList<Monster> monsters;
     private ArrayList<Item> items;
     private final int NUM_MONSTERS;
@@ -25,9 +25,13 @@ public class Grid
     
     public void populate() //If in constructor, causes null pointer. Gets called by Window.
     {
-        player = new Player();
         populateMonsters();
         populateItems();
+    }
+    
+    public void createPlayer()
+    {
+        player = new Player();
     }
     
     private void populateMonsters()
@@ -48,6 +52,16 @@ public class Grid
     public char[][] getGrid()
     {
         return grid;
+    }
+    
+    public int numMonsters()
+    {
+        return monsters.size();
+    }
+    
+    public int numItems()
+    {
+        return items.size();
     }
     
     public int getGridLength()
@@ -137,6 +151,13 @@ public class Grid
             if(it != null)
                 items.remove(it);
         }
+        else if(keyCode == 46)
+            if(Window.getGrid().numMonsters() == 0 && Window.getGrid().numItems() == 0)
+                Window.changeGridDown();
+            else
+                System.out.println("Kill all monsters and pick up all items first!");
+        else if(keyCode == 44)        
+            System.out.println("You can't leave the dungeon!"); 
         try
         {    
             for(Monster m : monsters)

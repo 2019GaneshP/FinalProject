@@ -2,18 +2,22 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-
+import java.util.*;
 
 public class Window extends Frame
 {
-    private static Grid gr;
+    private static ArrayList<Grid> grids;
+    private static Grid currGrid;
     private BufferedImage bufferImage;
     
     public Window()
     {
         super("TEST");
-        gr = new Grid(5,5);
-        gr.populate();
+        grids = new ArrayList<Grid>();
+        currGrid = new Grid(5,5);
+        currGrid.createPlayer();
+        currGrid.populate();
+        grids.add(currGrid);
         this.setSize(400,400);
         this.setBackground(Color.BLACK);
         
@@ -36,7 +40,7 @@ public class Window extends Frame
             public void keyPressed(KeyEvent e) 
             {
                 //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
-                gr.processKeyPress(e.getKeyCode());
+                currGrid.processKeyPress(e.getKeyCode());
                 repaint();
             }
 
@@ -54,14 +58,32 @@ public class Window extends Frame
     
     public static Grid getGrid()
     {
-        return gr;
+        return currGrid;
     }
     
     public static char[][] getCharGrid()
     {
-        return gr.getGrid();
+        return currGrid.getGrid();
     }
     
+    public static void changeGridDown()
+    {
+        if(grids.indexOf(currGrid) + 1 == grids.size())
+        {
+            Grid g = new Grid(5,5);
+            grids.add(g);
+            currGrid = g;
+            currGrid.populate();
+            System.out.println("You are on level " + grids.indexOf(currGrid));
+        }
+        else
+        {
+            currGrid = grids.get(grids.indexOf(currGrid) - 1);
+            System.out.println("You are on level " + grids.indexOf(currGrid));
+        }
+        
+    }
+        
     public void paint(Graphics g)
     {
         bufferImage = new BufferedImage(this.getWidth(),this.getHeight(),4);
