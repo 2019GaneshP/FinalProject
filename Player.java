@@ -7,10 +7,11 @@
  */
 public class Player extends MoveableChar
 {
-    
+    private static boolean hasStrawberry;
     public Player()
     {
         super(10,1,'@');   
+        hasStrawberry = false;
     }
     
     public Item pickUp()
@@ -19,6 +20,16 @@ public class Player extends MoveableChar
         if(i != null)
             i.pickUp();
         return i;
+    }
+    
+    public static void setStrawberryStatus(boolean in)
+    {
+        hasStrawberry = true;
+    }
+    
+    public static boolean getStrawberryStatus()
+    {
+        return hasStrawberry;
     }
     
     public String getName()

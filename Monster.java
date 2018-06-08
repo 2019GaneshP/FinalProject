@@ -15,7 +15,7 @@ public abstract class Monster extends MoveableChar
      */
     public Monster(char icon)
     {
-        super(10,1,icon);
+        super(10 + (10 * Window.getGridIndex()),1 + (int) (Math.pow(Window.getGridIndex(),2)),icon); //Adds 10H and increases D exponentially for each level.
     }
     
     public void moveMonster()

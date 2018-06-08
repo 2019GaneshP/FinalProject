@@ -10,7 +10,7 @@ public abstract class Item
     int[] pos = new int[2];
     private char icon;
     
-    private static final int NUM_ITEM_TYPES = 1; // Change when adding items.
+    private static final int NUM_ITEM_TYPES = 3; // Change when adding items.
     
     public Item(char iconIn)
     {
@@ -46,6 +46,11 @@ public abstract class Item
         return pos;
     }
     
+    public static Item createStrawberry()
+    {
+        return new Strawberry();
+    }
+    
     public static Item createItem()
     {
         int r = (int) (Math.random() * NUM_ITEM_TYPES);
@@ -56,7 +61,11 @@ public abstract class Item
         }
         else if(r == 1)
         {
-            //return new Mummy();
+            return new Armor();
+        }
+        else if(r == 2)
+        {
+            return new Potion();
         }
         return null;
     }

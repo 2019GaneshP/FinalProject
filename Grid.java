@@ -46,6 +46,11 @@ public class Grid
             this.addItem(Item.createItem());
     }
     
+    public void spawnStrawberry()
+    {
+        this.addItem(Item.createStrawberry());
+    }
+    
     /**
      * returns the whole grid. 
      */
@@ -128,7 +133,14 @@ public class Grid
     
     public void kill()
     {
-        grid = null;
+        Window.setGrid(null);
+    }
+    
+    private void refreshOutput()
+    {
+        System.out.print("\f");
+        System.out.println("Your health is: " + player.getHealth() + ", your damage is: " + player.getDamage() +
+        ", and your armor is: " + player.getArmor());
     }
     
     /**
@@ -137,27 +149,51 @@ public class Grid
      */
     public void processKeyPress(int keyCode)
     {
+        
         if(keyCode == 37)
+        {
+            refreshOutput();
             player.move("left");
+        }
         else if(keyCode == 38)
+        {
+            refreshOutput();
             player.move("up");
+        }   
         else if(keyCode == 39)
+        {
+            refreshOutput();
             player.move("right");
+        }
         else if(keyCode == 40)
+        {
+            refreshOutput();
             player.move("down");
-        else if(keyCode == 44)
+        }
+        else if(keyCode == 71)
         {
             Item it = player.pickUp();
             if(it != null)
                 items.remove(it);
+            refreshOutput();
         }
         else if(keyCode == 46)
+        {
+            refreshOutput();
             if(Window.getGrid().numMonsters() == 0 && Window.getGrid().numItems() == 0)
                 Window.changeGridDown();
             else
                 System.out.println("Kill all monsters and pick up all items first!");
-        else if(keyCode == 44)        
-            System.out.println("You can't leave the dungeon!"); 
+        }
+        else if(keyCode == 44)
+        {
+            refreshOutput();
+            if(!Player.getStrawberryStatus())
+                System.out.println("You can't leave the dungeon!");
+            else
+                System.out.println("YOU WIN!");
+            
+        }
         try
         {    
             for(Monster m : monsters)

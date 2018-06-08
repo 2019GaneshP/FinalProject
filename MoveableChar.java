@@ -10,6 +10,7 @@ public abstract class MoveableChar
     int[] pos = new int[2]; // 0 is y-coord, 1 is x-coord
     private int health;
     private int attackDamage;
+    private int armor;
     private char icon;
     private char prevChar;
     private ArrayList<Character> forbiddenChars; //Chars that the player can't move in to. 
@@ -24,7 +25,7 @@ public abstract class MoveableChar
         health = healthIn;
         attackDamage = dmgIn;
         icon = iconIn;
-        
+        armor = 0; // Base armor
         forbiddenChars = new ArrayList<Character>();
         forbiddenChars.add('X');
         forbiddenChars.add('M');
@@ -109,7 +110,15 @@ public abstract class MoveableChar
     
     public void changeHealth(int change)
     {
-        health += change;
+        if(change < 0 && armor < Math.abs(change))
+            health += change + armor;
+        else if(change < 0 && armor >= Math.abs(change))
+        {
+            System.out.println("Your armor deflects the blow!");
+        }
+        else
+            health += change;
+        
         if(health <= 0 && isMonster(this))
         {
             Window.getGrid().setGridChar(this.getPos()[0],this.getPos()[1],this.prevChar);
@@ -128,12 +137,25 @@ public abstract class MoveableChar
         attackDamage += change;
     }
     
+    public void changeArmor(int change)
+    {
+        armor += change;
+    }
     
-    private int getDamage()
+    public int getDamage()
     {
         return attackDamage;
     }
     
+    public int getHealth()
+    {
+        return health;
+    }
+    
+    public int getArmor()
+    {
+        return armor;
+    }
     
     public void attack(String dir) //Figure out why monsters don't disappear after killed. 
     { 
