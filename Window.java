@@ -43,7 +43,18 @@ public class Window extends Frame
             public void keyPressed(KeyEvent e) 
             {
                 //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
-                currGrid.processKeyPress(e.getKeyCode());
+                if(currGrid != null)
+                {    
+                    try
+                    {
+                        currGrid.processKeyPress(e.getKeyCode());
+                    }
+                    catch(NullPointerException n)
+                    {
+                        //This is just to prevent the nullpointer for the turn when the player's
+                        //health hits 0. Otherwise, it works.
+                    }
+                }
                 repaint();
             }
 
@@ -81,7 +92,7 @@ public class Window extends Frame
             Grid g = new Grid(5,5);
             grids.add(g);
             currGrid = g;
-            if( grids.indexOf(currGrid) == 1)
+            if( grids.indexOf(currGrid) == 10)
                 currGrid.spawnStrawberry();
             currGrid.populate();
             System.out.println("You are on level " + grids.indexOf(currGrid));
@@ -150,9 +161,9 @@ public class Window extends Frame
             bufferImage = new BufferedImage(this.getWidth(),this.getHeight(),4);
             Graphics2D graph = bufferImage.createGraphics();
             
-            graph.setColor(Color.RED);
+            graph.setColor(Color.YELLOW);
             graph.setFont(new Font(Font.MONOSPACED,Font.PLAIN,36));
-            graph.drawString("You Are Dead",200,100);
+            graph.drawString("Game over",100,200);
             g.drawImage(bufferImage, 0, 0, null);
         }
     }
